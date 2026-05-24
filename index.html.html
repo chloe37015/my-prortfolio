@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人作品集 - 專業設計師與開發者</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(200, 200, 200, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+        
+        .skill-tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background-color: #e0e0e0;
+            border-color: #999;
+            transform: translateY(-2px);
+        }
+        
+        .project-card {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+            border-color: #d0d0d0;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #ccc;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 24px;
+        }
+        
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #222;
+        }
+        
+        .project-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            background-color: #f5f5f5;
+            color: #666;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #000;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #333;
+        }
+        
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #666;
+        }
+        
+        .btn-primary {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid #000;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #000;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid #000;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #333;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #333;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+        
+        .file-input-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+        
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        footer {
+            background-color: #f9f9f9;
+            border-top: 1px solid #e5e5e5;
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="fixed top-0 left-0 right-0 bg-white bg-opacity-95 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-black">Portfolio</div>
+            <div class="flex gap-8 items-center">
+                <a href="#home" class="nav-link">首頁</a>
+                <a href="#projects" class="nav-link">作品</a>
+                <a href="#about" class="nav-link">關於</a>
+                <a href="#contact" class="nav-link">聯絡</a>
+                <button onclick="openProjectModal()" class="btn-primary">+ 新增作品</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 首頁區域 -->
+    <section id="home" class="hero-section mt-16">
+        <div class="hero-content">
+            <h1 class="text-5xl font-bold mb-6 text-black">歡迎來到我的作品集</h1>
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">我是一位充滿熱情的設計師與開發者，致力於創造美觀、實用的數位產品。</p>
+            <div class="flex gap-4 justify-center">
+                <a href="#projects" class="btn-primary">探索作品</a>
+                <a href="#contact" class="btn-secondary">聯絡我</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展示區 -->
+    <section id="projects" class="section bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title">精選作品</h2>
+            
+            <div id="projectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 預設作品範例 -->
+                <div class="project-card">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <div class="project-title">行動應用設計</div>
+                        <div class="project-description">為現代企業設計的響應式行動應用介面</div>
+                        <div class="project-tags">
+                            <span class="project-tag">UI/UX</span>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🎨</div>
+                    <div class="project-content">
+                        <div class="project-title">品牌識別系統</div>
+                        <div class="project-description">完整的視覺識別系統設計與規範文檔</div>
+                        <div class="project-tags">
+                            <span class="project-tag">品牌</span>
+                            <span class="project-tag">設計</span>
+                            <span class="project-tag">視覺</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">💻</div>
+                    <div class="project-content">
+                        <div class="project-title">電商平台開發</div>
+                        <div class="project-description">全棧電商解決方案，包含前後端與支付系統</div>
+                        <div class="project-tags">
+                            <span class="project-tag">全棧</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="openProjectModal()" class="btn-primary">新增更多作品</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能標籤區 -->
+    <section class="section bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title">技能與專長</h2>
+            <div id="skillsContainer" class="flex flex-wrap justify-center gap-3">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Vue.js</span>
+                <span class="skill-tag">Tailwind CSS</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">REST API</span>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="openSkillsModal()" class="btn-secondary">編輯技能</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我 -->
+    <section id="about" class="section bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title">關於我</h2>
+            <div id="aboutContent" class="text-center">
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    我是一位擁有 5 年經驗的全棧開發者與 UI/UX 設計師。我熱愛將創意想法轉化為實際的數位產品，並致力於創造優雅、高效的使用者體驗。
+                </p>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    我的專長包括前端開發、響應式設計、使用者介面設計與品牌視覺識別。我相信好的設計不僅要美觀，更要實用且易於使用。
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    在閒暇時間，我喜歡探索新的設計趨勢、參與開源項目，以及與志同道合的設計師和開發者交流。
+                </p>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="openAboutModal()" class="btn-secondary">編輯自我介紹</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡資訊 -->
+    <section id="contact" class="section bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title">聯絡我</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="text-center">
+                    <div class="text-3xl mb-4">📧</div>
+                    <h3 class="font-semibold text-lg mb-2">電子郵件</h3>
+                    <a href="mailto:hello@example.com" class="text-gray-600 hover:text-black transition">hello@example.com</a>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl mb-4">💼</div>
+                    <h3 class="font-semibold text-lg mb-2">LinkedIn</h3>
+                    <a href="https://linkedin.com" target="_blank" class="text-gray-600 hover:text-black transition">查看我的檔案</a>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl mb-4">🐙</div>
+                    <h3 class="font-semibold text-lg mb-2">GitHub</h3>
+                    <a href="https://github.com" target="_blank" class="text-gray-600 hover:text-black transition">查看我的代碼</a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="success-message" id="successMessage">✓ 感謝您的訊息，我會盡快回覆您！</div>
+                <form onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">電子郵件</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">訊息</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary">發送訊息</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新增作品 Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeProjectModal()">&times;</span>
+            <h2 class="text-2xl font-bold mb-6">新增作品</h2>
+            
+            <form onsubmit="handleAddProject(event)">
+                <div class="form-group">
+                    <label for="projectTitle">作品標題</label>
+                    <input type="text" id="projectTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDescription">作品描述</label>
+                    <textarea id="projectDescription" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectTags">技能標籤（用逗號分隔）</label>
+                    <input type="text" id="projectTags" placeholder="例如: React, Tailwind, UI Design">
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectImage">上傳圖片或 PDF</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="projectImage" accept="image/*,.pdf">
+                        <label for="projectImage" class="file-input-label">點擊選擇檔案</label>
+                    </div>
+                    <div id="filePreview" class="mt-4"></div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn-primary">新增作品</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 編輯自我介紹 Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeAboutModal()">&times;</span>
+            <h2 class="text-2xl font-bold mb-6">編輯自我介紹</h2>
+            
+            <form onsubmit="handleUpdateAbout(event)">
+                <div class="form-group">
+                    <label for="aboutText">自我介紹</label>
+                    <textarea id="aboutText" required></textarea>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 編輯技能 Modal -->
+    <div id="skillsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeSkillsModal()">&times;</span>
+            <h2 class="text-2xl font-bold mb-6">編輯技能標籤</h2>
+            
+            <form onsubmit="handleUpdateSkills(event)">
+                <div class="form-group">
+                    <label for="skillsText">技能標籤（每行一個）</label>
+                    <textarea id="skillsText" required></textarea>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 個人作品集. 版權所有。</p>
+        <p class="mt-2 text-sm">使用 HTML5、Tailwind CSS 與 JavaScript 製作</p>
+    </footer>
+
+    <script>
+        // 初始化本地存儲
+        function initializeStorage() {
+            if (!localStorage.getItem('projects')) {
+                localStorage.setItem('projects', JSON.stringify([
+                    {
+                        id: 1,
+                        title: '行動應用設計',
+                        description: '為現代企業設計的響應式行動應用介面',
+                        tags: ['UI/UX', 'React', 'Tailwind'],
+                        image: null
+                    },
+                    {
+                        id: 2,
+                        title: '品牌識別系統',
+                        description: '完整的視覺識別系統設計與規範文檔',
+                        tags: ['品牌', '設計', '視覺'],
+                        image: null
+                    },
+                    {
+                        id: 3,
+                        title: '電商平台開發',
+                        description: '全棧電商解決方案，包含前後端與支付系統',
+                        tags: ['全棧', 'Node.js', 'MongoDB'],
+                        image: null
+                    }
+                ]));
+            }
+
+            if (!localStorage.getItem('about')) {
+                localStorage.setItem('about', '我是一位擁有 5 年經驗的全棧開發者與 UI/UX 設計師。我熱愛將創意想法轉化為實際的數位產品，並致力於創造優雅、高效的使用者體驗。\n\n我的專長包括前端開發、響應式設計、使用者介面設計與品牌視覺識別。我相信好的設計不僅要美觀，更要實用且易於使用。\n\n在閒暇時間，我喜歡探索新的設計趨勢、參與開源項目，以及與志同道合的設計師和開發者交流。');
+            }
+
+            if (!localStorage.getItem('skills')) {
+                localStorage.setItem('skills', JSON.stringify(['HTML5', 'CSS3', 'JavaScript', 'React', 'Vue.js', 'Tailwind CSS', 'Node.js', 'MongoDB', 'UI/UX Design', 'Figma', 'Git', 'REST API']));
+            }
+        }
+
+        // 渲染作品
+        function renderProjects() {
+            const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+            const container = document.getElementById('projectsContainer');
+            
+            container.innerHTML = projects.map(project => `
+                <div class="project-card">
+                    <div class="project-image">
+                        ${project.image ? `<img src="${project.image}" alt="${project.title}">` : '📁'}
+                    </div>
+                    <div class="project-content">
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-description">${project.description}</div>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="mt-4 flex gap-2">
+                            <button onclick="deleteProject(${project.id})" class="text-sm text-red-600 hover:text-red-800">刪除</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 渲染技能
+        function renderSkills() {
+            const skills = JSON.parse(localStorage.getItem('skills') || '[]');
+            const container = document.getElementById('skillsContainer');
+            
+            container.innerHTML = skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+        }
+
+        // 渲染關於我
+        function renderAbout() {
+            const about = localStorage.getItem('about') || '';
+            const aboutContent = document.getElementById('aboutContent');
+            
+            aboutContent.innerHTML = about.split('\n\n').map(paragraph => 
+                `<p class="text-lg text-gray-700 mb-6 leading-relaxed">${paragraph}</p>`
+            ).join('');
+        }
+
+        // Modal 控制
+        function openProjectModal() {
+            document.getElementById('projectModal').classList.add('active');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.remove('active');
+            document.getElementById('projectTitle').value = '';
+            document.getElementById('projectDescription').value = '';
+            document.getElementById('projectTags').value = '';
+            document.getElementById('projectImage').value = '';
+            document.getElementById('filePreview').innerHTML = '';
+        }
+
+        function openAboutModal() {
+            const about = localStorage.getItem('about') || '';
+            document.getElementById('aboutText').value = about;
+            document.getElementById('aboutModal').classList.add('active');
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.remove('active');
+        }
+
+        function openSkillsModal() {
+            const skills = JSON.parse(localStorage.getItem('skills') || '[]');
+            document.getElementById('skillsText').value = skills.join('\n');
+            document.getElementById('skillsModal').classList.add('active');
+        }
+
+        function closeSkillsModal() {
+            document.getElementById('skillsModal').classList.remove('active');
+        }
+
+        // 文件預覽
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('projectImage');
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    const preview = document.getElementById('filePreview');
+                    
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            if (file.type.startsWith('image/')) {
+                                preview.innerHTML = `<img src="${event.target.result}" style="max-width: 100%; max-height: 200px; border-radius: 4px;">`;
+                            } else if (file.type === 'application/pdf') {
+                                preview.innerHTML = `<div style="padding: 20px; background: #f5f5f5; border-radius: 4px; text-align: center;">📄 ${file.name}</div>`;
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+
+        // 新增作品
+        function handleAddProject(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('projectTitle').value;
+            const description = document.getElementById('projectDescription').value;
+            const tagsInput = document.getElementById('projectTags').value;
+            const tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag);
+            
+            const fileInput = document.getElementById('projectImage');
+            const file = fileInput.files[0];
+            
+            const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+            const newId = Math.max(...projects.map(p => p.id), 0) + 1;
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const newProject = {
+                        id: newId,
+                        title,
+                        description,
+                        tags,
+                        image: event.target.result
+                    };
+                    
+                    projects.push(newProject);
+                    localStorage.setItem('projects', JSON.stringify(projects));
+                    renderProjects();
+                    closeProjectModal();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const newProject = {
+                    id: newId,
+                    title,
+                    description,
+                    tags,
+                    image: null
+                };
+                
+                projects.push(newProject);
+                localStorage.setItem('projects', JSON.stringify(projects));
+                renderProjects();
+                closeProjectModal();
+            }
+        }
+
+        // 刪除作品
+        function deleteProject(id) {
+            if (confirm('確定要刪除這個作品嗎？')) {
+                const projects = JSON.parse(localStorage.getItem('projects') || '[]');
+                const filtered = projects.filter(p => p.id !== id);
+                localStorage.setItem('projects', JSON.stringify(filtered));
+                renderProjects();
+            }
+        }
+
+        // 更新自我介紹
+        function handleUpdateAbout(e) {
+            e.preventDefault();
+            const about = document.getElementById('aboutText').value;
+            localStorage.setItem('about', about);
+            renderAbout();
+            closeAboutModal();
+        }
+
+        // 更新技能
+        function handleUpdateSkills(e) {
+            e.preventDefault();
+            const skillsText = document.getElementById('skillsText').value;
+            const skills = skillsText.split('\n').map(skill => skill.trim()).filter(skill => skill);
+            localStorage.setItem('skills', JSON.stringify(skills));
+            renderSkills();
+            closeSkillsModal();
+        }
+
+        // 聯絡表單
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // 這裡可以連接到後端服務發送郵件
+            console.log('訊息已提交:', { name, email, message });
+            
+            // 顯示成功訊息
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // 重置表單
+            e.target.reset();
+            
+            // 3秒後隱藏成功訊息
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        // 關閉 Modal 當點擊背景
+        window.onclick = function(event) {
+            const projectModal = document.getElementById('projectModal');
+            const aboutModal = document.getElementById('aboutModal');
+            const skillsModal = document.getElementById('skillsModal');
+            
+            if (event.target === projectModal) {
+                closeProjectModal();
+            }
+            if (event.target === aboutModal) {
+                closeAboutModal();
+            }
+            if (event.target === skillsModal) {
+                closeSkillsModal();
+            }
+        }
+
+        // 頁面加載時初始化
+        window.addEventListener('load', function() {
+            initializeStorage();
+            renderProjects();
+            renderSkills();
+            renderAbout();
+        });
+    </script>
+</body>
+</html>
